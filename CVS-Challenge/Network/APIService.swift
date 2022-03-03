@@ -12,7 +12,8 @@ struct APIService {
     static let shared = APIService()
     
     func search(searchText: String, completion: @escaping (Result<FlickrResponseModel, NetworkError>) -> Void) {
-        let endpoint = AppConstants.baseURL + searchText
+        // Remove spaces from searchText to prevent .badResponse
+        let endpoint = AppConstants.baseURL + searchText.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
         // We need to cancel previous requests as one typing really fast can result in a race condition where and old search finishes
         // before the last one. Other options would be DispatchQueue and Sephamores that would guarantee the requests are made sequentially,
         // however this can result in slower performance.

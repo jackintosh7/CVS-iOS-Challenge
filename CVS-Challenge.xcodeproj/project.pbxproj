@@ -100,8 +100,7 @@
 			children = (
 				3434D08527CDF6AC0081C197 /* CVS_ChallengeApp.swift */,
 				3434D09F27CDFCF40081C197 /* AppConstants.swift */,
-				3434D09D27CDF8DA0081C197 /* FlickrImage.swift */,
-				346CD2C327D07F0400080AAA /* FlickrImage+SizeUtility.swift */,
+				34FAEB3227D09CD000F67C05 /* Models */,
 				3434D0A327CDFFE80081C197 /* Network */,
 				3434D0A627CE00100081C197 /* Views */,
 				3434D08927CDF6AD0081C197 /* Assets.xcassets */,
@@ -161,6 +160,15 @@
 				34FAEB3027D0966700F67C05 /* MockResponses.swift */,
 			);
 			path = "CVS-ChallengeTests";
+			sourceTree = "<group>";
+		};
+		34FAEB3227D09CD000F67C05 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3434D09D27CDF8DA0081C197 /* FlickrImage.swift */,
+				346CD2C327D07F0400080AAA /* FlickrImage+SizeUtility.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		92751E6F0F41F039B675D684 /* Frameworks */ = {
