@@ -18,7 +18,7 @@ class ImageDetailViewModel: ObservableObject {
     }
     
     func getImageSize() {
-        flickrImage.getImageSize { [self] result in
+        FlickrImage.getImageSize(desc: flickrImage.description) { [self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let imgSize):

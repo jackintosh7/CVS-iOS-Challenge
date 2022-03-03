@@ -8,46 +8,42 @@
 import Foundation
 import SwiftSoup
 
-struct ImageSize {
+struct ImageSize: Equatable {
     let width: String
     let height: String
 }
 
-enum ImageSizeError: Error {
+enum ImageSizeError: Error, Equatable {
     case noWidth
     case noHeight
     case noImgSource
-    case unableToParse(message: String)
+    case unableToParse
 }
 
 extension FlickrImage {
-    func getImageSize(completionHandler: @escaping (Result<ImageSize, ImageSizeError>) -> ()) {
+    static func getImageSize(desc: String, completionHandler: @escaping (Result<ImageSize, ImageSizeError>) -> ()) {
         do {
-            let doc: Document = try SwiftSoup.parse(self.description)
-            guard let imageSrc = try doc.select("img[src]").first() else {
+            let doc: Document = try SwiftSoup.parse(desc)
+            guard let imageSrc = try? doc.select("img[src]").first() else {
                 completionHandler(.failure(.noImgSource))
                 return
             }
             
-        
-            guard let width = try? imageSrc.attr("width") else {
+            guard let width = try? imageSrc.attr("width"), !width.isEmpty else {
                 completionHandler(.failure(.noWidth))
                 return
             }
             
-            guard let height = try? imageSrc.attr("height") else {
+            guard let height = try? imageSrc.attr("height"), !height.isEmpty else {
                 completionHandler(.failure(.noHeight))
                 return
             }
             
             let size = ImageSize(width: width, height: height)
             completionHandler(.success(size))
-        } catch Exception.Error(_, let message) {
-            print(message)
-            completionHandler(.failure(.unableToParse(message: "Unknown parse error")))
         } catch {
             print("error")
-            completionHandler(.failure(.unableToParse(message: "Unknown parse error")))
+            completionHandler(.failure(.unableToParse))
         }
     }
 }
