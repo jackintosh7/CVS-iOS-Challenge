@@ -24,15 +24,16 @@ struct ImageDetailView: View {
             ScrollView {
                 KFImage(viewModel.flickrImage.media)
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                 HStack {
                     VStack(alignment: .leading) {
                         Text(viewModel.flickrImage.title)
                             .multilineTextAlignment(.leading)
                             .font(.title)
                             .padding(.bottom)
-                        ImageDetail(property: "Tags:", text: viewModel.flickrImage.tags)
+                        ImageDetail(property: "Width & Height:", text: viewModel.imageSize)
                             .padding(.bottom)
-                        ImageDetail(property: "Width & Heightze:", text: viewModel.imageSize)
+                        ImageDetail(property: "Tags:", text: viewModel.flickrImage.tags)
                     }
                     Spacer()
                 }
